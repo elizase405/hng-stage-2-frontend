@@ -1,16 +1,26 @@
+import { useState, useEffect } from "react";
 import Product from "./Product";
-import smartwatch from "../img/products/smartwatch.png"
-import menflower from "../img/products/menflower.png"
-import purpledress from "../img/products/purpledress.png"
-import mendress from "../img/products/mendress.png"
 import mendress2 from "../img/products/mendress2.png"
-import menwatch from "../img/products/menwatch.png"
-import gown from "../img/products/gown.png"
-import womenwatch from "../img/products/womenwatch.png"
 import star from "../img/products/star.png"
-import cap from "../img/products/cap.png"
+import productService from "../services/products"
 
 const ProductBody = ({ handleMoreProducts, handleAddToCart }) => {
+    const [items, setItems] = useState([])
+    const [productsDetail, setProductsDetail] = useState([])
+
+    useEffect(() => {
+        productService.getProducts().then(res => setItems(res.items))
+    }, [])
+    const products = items.map(item => {
+        return {
+            "name": item.name,
+            "url": `https://api.timbu.cloud/images/${item.photos[0].url}`,
+            "price": item.current_price[0].LRD[0],
+            "size": item.available_quantity,
+            "id": item.unique_id
+        }
+    })
+
 	return (
 		<div className="w-[80%] mx-auto">
 			<div>
@@ -29,25 +39,9 @@ const ProductBody = ({ handleMoreProducts, handleAddToCart }) => {
 				<input type="checkbox" id="womenaccessory" className="accent-black w-5 h-5 mr-2"/><label htmlFor="womenaccessory">Women's Accessories</label>
 			</div>
 			<div className="md:col-span-3 grid grid-cols-2 grid-rows-5 md:grid-cols-3 md:grid-rows-3 gap-2">
-				<Product img={smartwatch} name={"Stainless Steel light Wristwatch"} price={"$150"} handleAddToCart={handleAddToCart} imgNo={1}/>
-				<Product img={menflower} name={"Mens Flowery long sleeve dress"} price={"$125"} handleAddToCart={handleAddToCart} imgNo={2}/>
-				<Product img={purpledress} name={"Purple Bilq Party Dress"} price={"$105"} handleAddToCart={handleAddToCart} imgNo={3}/>
-				<Product img={mendress} name={"Mens Dress Shirts Long sleeve blue"} price={"$59"} handleAddToCart={handleAddToCart} imgNo={4}/>
-				<Product img={cap} name={"Asni for Men Waterproof Leather Smart Wrist"} price={"$240"} handleAddToCart={handleAddToCart} imgNo={5}/>
-				<Product img={mendress2} name={"Mens Dress Shirts Long Sleeve Business"} price={"$68"} handleAddToCart={handleAddToCart} imgNo={6}/>
-				<Product img={menwatch} name={"NDS Leather Iced Men’s Wristwatch"} price={"$320"} handleAddToCart={handleAddToCart} imgNo={7}/>
-				<Product img={gown} name={"Beautiful Ladies Fashionable Gown"} price={"$310"} handleAddToCart={handleAddToCart} imgNo={8}/>
-				<Product img={womenwatch} name={"Women’s Classic Digital Wristwatch"} price={"$230"} handleAddToCart={handleAddToCart} imgNo={9}/>
+                {products.map(({ id, name, url, price, size }) => <Product key={id} img={url} name={name} price={price} size={size} handleAddToCart={handleAddToCart} imgNo={1}/>)}
 				<div className="md:hidden">
-					<img src={mendress2} alt="a product"/>
-					<p className="font-bold pt-3">Mens Dress Shirts Long Sleeve Business</p>
-					<span>68</span>
-					<img className=" pl-2 inline w-[20px] h-[20px]" src={star}/>
-					<img className=" pl-2 inline w-[20px] h-[20px]" src={star}/>
-					<img className=" pl-2 inline w-[20px] h-[20px]" src={star}/>
-					<img className=" pl-2 inline w-[20px] h-[20px]" src={star}/>
-					<span className="pl-2">(2)</span>
-					<button onClick={() => handleAddToCart(10)} className="block pt-2 rounded-md text-center text-white h-10 w-full bg-[#ff8000] mt-3 text-sm font-semibold pb-2">ADD TO CART</button>
+                    <Product img={mendress2} name={"Mens Dress Shirts Long Sleeve Business"} price={"68"} handleAddToCart={handleAddToCart} imgNo={10}/>
 				</div>
 			</div>
 		</div>

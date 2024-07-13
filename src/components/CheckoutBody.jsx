@@ -1,31 +1,45 @@
-const CheckoutBody = () => {
-	const handleClick = () => {
-		alert("Shipping details added!")
-	}
+import { Link } from "react-router-dom";
+import Address from "./Address"
+import Shipping from "./Shipping"
+import Payment from "./Payment"
+import CartItems from "./CartItems"
+
+const CheckoutBody = ( { handleClick, address, handleAddress, shipping, handleShipping, payment, handlePayment } ) => {
 	return (
-		<div className="w-[80%] mx-auto">
-			<h3 className="font-bold text-2xl mt-10 mb-2">Checkout</h3>
-			<div class="flex flex-col md:flex-row md:flex-wrap">
-				<div className="w-full md:w-1/2">
-					<p className="font-semibold mb-4">Shipping Information</p>
-					<input className="outline-none w-1/2 md:w-1/3 p-2 border border-black" type="text" placeholder="Michelle"/>
-					<input className="outline-none w-1/2 md:w-1/3 p-2 border border-black md:ml-2 mb-2" type="text" type="text" placeholder="Urphazin"/><br />
-					<input className="outline-none w-full md:w-2/3 p-2 border border-black mb-2" type="text" type="text" placeholder="49 FeatherStone Street, ECIY 8SY, United Kingdom"/><br />
-					<input className="outline-none w-full md:w-2/3 p-2 border border-black mb-2" type="text" placeholder="Apartment"/><br />
-					<input className="outline-none w-full md:w-2/3 p-2 border border-black mb-2" type="text" placeholder="United Kingdom"/><br />
-					<select className="outline-none w-1/2 md:w-1/3 p-2 border border-black mb-2" name="state">
-						<option value="london">London</option>
-						<option value="london">Lagos</option>
-						<option value="london">Nairobi</option>
-						<option value="london">Accra</option>
-						<option value="london">Others</option>
-					</select>
-					<input className="outline-none w-1/2 md:w-1/3 p-2 border border-black mb-2 md:ml-2" type="text" placeholder="ECIY 8SY"/><br />
-					<input className="outline-none md:w-2/3 p-2 border border-black mb-2 w-full" type="text" placeholder="Optional"/><br />
-					<input className="accent-black w-5 h-5 mr-2 mt-2" id="saveInfo" type="checkbox" defaultChecked/><label htmlFor="saveInfo" >Save contact information</label>
-					<button onClick={handleClick} className="w-full block pt-2 mt-10 rounded-md text-center text-white h-10 w-5/5 md:w-2/3 bg-[#ff8000] mt-3 text-sm font-semibold pb-2">Continue to shipping</button>
-				</div>
-			</div>
+		<div className="w-[80%] mx-auto md:mb-60">
+			<h3 className="font-bold text-3xl mt-10 mb-2">Checkout</h3>
+            <div className="flex flex-col md:flex-row">
+                <div className="md:w-1/2">
+                    <div className="mb-8">
+                        {address ? <Link onClick={handleAddress} className="font-bold">Address</Link> : <Link onClick={handleAddress}>Address</Link>}
+                        <div className="border-t-2 inline-block w-20 border-black mx-2"></div>
+                        {shipping ? <Link onClick={handleShipping} className="font-bold">Shipping</Link> : <Link onClick={handleShipping}>Shipping</Link>}
+                        <div className="border-t-2 inline-block w-20 border-black mx-2"></div>
+                        {payment ? <Link onClick={handlePayment} className="font-bold">Payment</Link> : <Link onClick={handlePayment}>Payment</Link>}
+                    </div>
+                    {address && <Address handleClick={handleShipping}/>}
+                    {shipping && <Shipping/>}
+                    {payment && <Payment/>}
+                </div>
+                <div className="md:w-1/2">
+                    <p className="text-2xl mb-5">Your cart</p>
+                    <CartItems />
+                    <input className="outline-none w-full md:w-5/6 p-2 pl-4 border border-[#909090] mb-2 md:bg-[#eff2f6] mt-6 mb-8" type="text" placeholder="WXUEPIEUPOIERW -00293"/>
+                    <div className="flex justify-between md:w-5/6 mb-4">
+                        <p>Subtotal</p>
+                        <p>$285</p>
+                    </div>
+                    <div className="flex justify-between md:w-5/6 mb-4">
+                        <p>Shipping</p>
+                        <p>$30</p>
+                    </div>
+                    <div className="w-full md:w-5/6 border border-black mb-4"></div>
+                    <div className="flex justify-between md:w-5/6">
+                        <p>Total</p>
+                        <p>$315</p>
+                    </div>
+                </div>
+            </div>
 		</div>
 
 	);

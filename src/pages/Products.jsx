@@ -6,14 +6,22 @@ import ProductBody from "../components/ProductBody";
 import Cart from "../pages/Cart";
 
 const Products = () => {
-	const [cartNo, setCartNo] = useState([])
+	const [cart, setCart] = useState([])
 	const navigate = useNavigate();
 	function handleMoreProducts() {
 		alert("No more products. Please Check again later.")
 	}
-	function handleAddToCart(imgNo) {
+	function handleAddToCart(obj) {
+        setCart(cartObj => {
+            const objIndex = cartObj.findIndex(item => item.name === obj.name);
+            if (objIndex !== -1) {
+                return cartObj.map((item, index) => index === objIndex ? { ...item, quantity: item.quantity + 1 } : item)
+            } else {
+                return [...cartObj, {...obj, quantity: 1}]
+            }
+        });
 		alert("Product added!")
-		setCartNo([...cartNo, imgNo]);
+        console.log(cart)
 	}
 
 	return (

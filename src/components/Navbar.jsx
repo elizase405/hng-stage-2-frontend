@@ -30,7 +30,7 @@ const Navbar = () => {
 			<div className="hidden md:flex text-sm">
 				<div className="m-auto bg-white rounded border-2">
 					<img src={search} alt="search_icon" className="w-4 h-4 inline pl-1" />
-					<input type="text" className="py-2 px-2.5 lg:w-[395px] outline-none" placeholder="Search" />
+					<input type="text" className="py-2 px-2.5 md:w-[150px] lg:w-[310px] xl:w-[395px] outline-none" placeholder="Search" />
 				</div>
 				<div className="md:flex space-x-4 lg:space-x-8 pl-4 list-none">
 					<div className="m-auto">

@@ -4,9 +4,9 @@ const Footer = () => {
 			
 			<div className="mt-8 md:w-1/3">
 				<p className="font-semibold sm:w-4/5 md:w-5/5 pb-4">Stay up to date on the latest features and releases by joining our newsletter.</p>
-				<div className="border-2 border-black py-2 w-5/5">
-					<input type="text" className="px-2.5 w-3/5 lg:w-4/5 outline-none bg-transparent" placeholder="Email Address" />
-					<label className="font-bold pl-4 cursor-pointer">Sign Up</label>
+				<div className="border-2 border-black py-2 w-5/5 md:mr-4 lg:mr-0 flex justify-between">
+					<input type="text" className="pl-2.5 w-3/4 md:w-3/6 lg:w-4/3 outline-none bg-transparent" placeholder="Email Address" />
+					<label className="font-bold cursor-pointer w-1/4 md:w-2/5 lg:w-1/4">Sign Up</label>
 				</div>
 				<p className="font-semibold pt-6">© 2024 Steeze. All rights reserved.</p>
 			</div>
